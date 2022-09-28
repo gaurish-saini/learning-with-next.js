@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
+// 9hUvOqGGdnCBvGKg4EB3L7mGdBC8hKKJ
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -13,33 +15,13 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to my E-Learning site</h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <h1 className={styles.title}>News Feed</h1>
 
         <div className={styles.grid}>
-          <Link href="/learn/next">
+          <Link href="/news/">
             <a className={styles.card}>
-              <h2>Learn Next &rarr;</h2>
-            </a>
-          </Link>
-
-          <Link href="/learn/react">
-            <a className={styles.card}>
-              <h2>Learn React &rarr;</h2>
-            </a>
-          </Link>
-          <Link href="/learn/vue">
-            <a className={styles.card}>
-              <h2>Learn Vue &rarr;</h2>
-            </a>
-          </Link>
-          <Link href="/learn/angular">
-            <a className={styles.card}>
-              <h2>Learn Angular &rarr;</h2>
+              <h2>Top Stories &rarr;</h2>
+              <p>Read articles currently on the homepage</p>
             </a>
           </Link>
         </div>
