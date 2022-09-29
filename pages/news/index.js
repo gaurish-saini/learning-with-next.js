@@ -1,4 +1,5 @@
 import Layout from "../../components/Layout";
+import { handler } from "../api";
 
 export default function News({ results }) {
   return (
@@ -22,9 +23,9 @@ export default function News({ results }) {
 const API_KEY = "9hUvOqGGdnCBvGKg4EB3L7mGdBC8hKKJ";
 
 export async function getStaticProps() {
-  const URL = `https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${API_KEY}`;
-  const response = await fetch(URL);
-  const data = await response.json();
+  const results = await handler(
+    `https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${API_KEY}`
+  );
   return {
     props: {
       results: data.results,
