@@ -6,6 +6,18 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const links = [
+    {
+      title: "Top Stories",
+      desc: "Read articles currently on the homepage of the New York Times",
+      path: "/top-stories",
+    },
+    {
+      title: "Popular",
+      desc: "Read the most popular articles on the New York Times",
+      path: "/popular",
+    },
+  ];
   const [query, getQuery] = useState();
   const router = useRouter();
   const handleOnChange = (e) => getQuery(e.target.value);
@@ -30,12 +42,16 @@ export default function Home() {
         </form>
 
         <div className={styles.grid}>
-          <Link href="/news/">
-            <a className={styles.card}>
-              <h2>Top Stories &rarr;</h2>
-              <p>Read articles currently on the homepage</p>
-            </a>
-          </Link>
+          {links.map((link) => {
+            return (
+              <Link key={link.path} href={`news/${link.path}`}>
+                <a className={styles.card}>
+                  <h2>{link.title} &rarr;</h2>
+                  <p>{link.desc}</p>
+                </a>
+              </Link>
+            );
+          })}
         </div>
       </main>
 
