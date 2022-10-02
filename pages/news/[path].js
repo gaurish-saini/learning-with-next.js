@@ -41,14 +41,28 @@ export async function getStaticPaths() {
 }
 
 const API_KEY = "9hUvOqGGdnCBvGKg4EB3L7mGdBC8hKKJ";
-export async function getStaticProps() {
-  const URL = `https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${API_KEY}`;
-  const results = await handler(URL);
-
-  return {
-    props: {
-      results,
-      title: "Top Stories",
-    },
-  };
+export async function getStaticProps(params) {
+  const TOP_STORIES_URL = `https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${API_KEY}`;
+  const POPULAR_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
+  switch (params.path) {
+    case "top-stories":
+      return {
+        props: {
+          results: await handler(TOP_STORIES_URL),
+          title: "Top Stories",
+        },
+      };
+    case "popular":
+      return {
+        props: {
+          results: await handler(POPULAR_URL),
+          title: "Top Stories",
+        },
+      };
+    default: {
+      return {
+        props: null,
+      };
+    }
+  }
 }
