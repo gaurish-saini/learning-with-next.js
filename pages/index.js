@@ -1,9 +1,36 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const links = [
+    {
+      title: "Top Stories",
+      desc: "Read articles currently on the homepage of the New York Times",
+      path: "news/top-stories",
+    },
+    {
+      title: "Popular",
+      desc: "Read the most popular articles on the New York Times",
+      path: "news/popular",
+    },
+    {
+      title: "Sections",
+      desc: "Get an up-to-the-minute stream of published articles",
+      path: "/sections",
+    },
+  ];
+  const [query, getQuery] = useState();
+  const router = useRouter();
+  const handleOnChange = (e) => getQuery(e.target.value);
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    router.push(`/news/${query}`);
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,35 +40,23 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to my E-Learning site</h1>
+        <h1 className={styles.title}>News Feed</h1>
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <form onSubmit={handleOnSubmit}>
+          <input type="text" onChange={handleOnChange} />
+        </form>
 
         <div className={styles.grid}>
-          <Link href="/learn/next">
-            <a className={styles.card}>
-              <h2>Learn Next &rarr;</h2>
-            </a>
-          </Link>
-
-          <Link href="/learn/react">
-            <a className={styles.card}>
-              <h2>Learn React &rarr;</h2>
-            </a>
-          </Link>
-          <Link href="/learn/vue">
-            <a className={styles.card}>
-              <h2>Learn Vue &rarr;</h2>
-            </a>
-          </Link>
-          <Link href="/learn/angular">
-            <a className={styles.card}>
-              <h2>Learn Angular &rarr;</h2>
-            </a>
-          </Link>
+          {links.map((link) => {
+            return (
+              <Link key={link.path} href={link.path}>
+                <a className={styles.card}>
+                  <h2>{link.title} &rarr;</h2>
+                  <p>{link.desc}</p>
+                </a>
+              </Link>
+            );
+          })}
         </div>
       </main>
 
